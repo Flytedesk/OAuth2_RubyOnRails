@@ -9,9 +9,38 @@ The sample is tested on Ruby 2.4.2
 The rails version is 5.1.4
 
 * Configuration and run<br>
-1.Update your OAuth 2 configuration value at OAuth2_RubyOnRails/OAuth2/config/config.yml file.<br>
-2.Update your Redirect URIs in your app. <br>
-[![solarized dualmode](https://github.com/IntuitDeveloper/OAuth2_RubyOnRails/blob/master/OAuth2/public/app_redirect.png)](#features)
-2.Put the whole directory to your server, and run "rails server" <br>
-3.If you are using localhost, you can download ngrok at:https://ngrok.com/ and run "ngrok http 3000" (3000 is your port number)<br>
-4. open a browser and go to the rail server host.
+  1. Install Ruby, Bundler, and gems:
+     ```
+     ❯ rbenv install
+     ❯ gem install bundler -v 1.15.4
+     ❯ bundle install
+     ```
+  2. Set up and run ngrok:
+      1. Install:
+         ```
+         ❯ brew install --cask ngrok
+         ```
+      2. Sign up for an account: https://dashboard.ngrok.com/signup
+      3. Copy your Authtoken: https://dashboard.ngrok.com/get-started/your-authtoken
+      4. Add your Authtoken:
+         ```
+         ❯ ngrok config add-authtoken <your_authtoken>
+         ```
+      5. Run:
+         ```
+         ❯ ngrok http 3000
+         ```
+  3. Update your OAuth 2 configuration value at config/config.yml file.<br>
+     ```
+     OAuth2:
+       client_id: <your_intuit_app_client_id>
+       client_secret: <your_intuit_app_client_secret>
+     ```
+     ```
+     Settings:
+       host_uri: https://<your_ngrok_dev_domain>/
+       redirect_uri: https://<your_ngrok_dev_domain>/token/new
+     ```
+  4. Update your Redirect URIs in your app. <br>
+  5. Put the whole directory to your server, and run "rails server" <br>
+  6. open a browser and go to the rail server host.
