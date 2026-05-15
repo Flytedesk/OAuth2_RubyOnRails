@@ -1,13 +1,6 @@
 OAuth2:
   client_id: Q0fXL014zAv3wzmlhwXMEHTrKepfAshCRjztEu58ZokzCD5T7D
   client_secret: stfnZfuSZUDay6cJSWtvQ9HkWiKFbcI9YuBTET5P
-Constant:
-  baseURL: https://appcenter.intuit.com/connect/oauth2
-  tokenURL: https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer
-  scope: com.intuit.quickbooks.accounting
-  resfresh_grant_type: refresh_token
-  response_type: code
-  grant_type: authorization_code
 Settings:
   host_uri: https://4a9fe3eb.ngrok.io/
   redirect_uri: https://4a9fe3eb.ngrok.io/token/new

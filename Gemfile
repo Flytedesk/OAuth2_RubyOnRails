@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'ffi', '~> 1.15.5'
 
+gem 'intuit-oauth', '~> 1.0.3'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
