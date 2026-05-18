@@ -4,4 +4,3 @@ OAuth2:
 Settings:
   host_uri: https://4a9fe3eb.ngrok.io/
   redirect_uri: https://4a9fe3eb.ngrok.io/token/new
-  state: randomState

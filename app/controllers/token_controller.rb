@@ -14,7 +14,7 @@ class TokenController < ApplicationController
   def new
     load_config
     state = params[:state].to_s
-    if(state == @state.to_s)
+    if state == session[:state]
       @code = params[:code]
       #record your ReamID to your DB
       @realmID = params[:realmId]
@@ -56,12 +56,13 @@ class TokenController < ApplicationController
     @client_secret = config['OAuth2']['client_secret']
     @scope = IntuitOAuth::Scopes::ACCOUNTING
     @redirect_uri = config["Settings"]["redirect_uri"]
-    @state = config["Settings"]["state"]
   end
 
   def construct_baseUrl
     load_config
-    oauth_client.code.get_auth_uri([@scope], @state)
+    state = SecureRandom.uuid
+    session[:state] = state
+    oauth_client.code.get_auth_uri([@scope], state)
   end
 
   def oauth_client
