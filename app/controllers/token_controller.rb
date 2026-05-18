@@ -19,10 +19,10 @@ class TokenController < ApplicationController
       #record your ReamID to your DB
       @realmID = params[:realmId]
       result = exchange_code_for_token
-      params[:refresh_token] = result.refresh_token
+      @qbo_account = QboAccount.sole
+      @qbo_account.update!(access_token: result.access_token, refresh_token: result.refresh_token)
       params[:expires_in] = result.expires_in
       params[:x_refresh_token_expires_in] = result.x_refresh_token_expires_in
-      params[:access_token] = result.access_token
       params[:host_uri] = @hostURL.to_s
     else
       render html: '<div>Your State is not matched, consider it hacked.<div>'.html_safe
@@ -30,11 +30,18 @@ class TokenController < ApplicationController
   end
 
   def edit
+    @qbo_account = QboAccount.sole
     result = refresh_token
-    params[:updated_refresh_token] = result.refresh_token
+    @qbo_account.update!(access_token: result.access_token, refresh_token: result.refresh_token)
     params[:updated_expires_in] = result.expires_in
     params[:updated_x_refresh_token_expires_in] = result.x_refresh_token_expires_in
-    params[:updated_access_token] = result.access_token
+    params[:host_uri] = @hostURL.to_s
+  end
+
+  def destroy
+    @qbo_account = QboAccount.sole
+    @qbo_account.destroy!
+    load_config
     params[:host_uri] = @hostURL.to_s
   end
 
@@ -42,7 +49,7 @@ class TokenController < ApplicationController
 
   def refresh_token
     load_config
-    oauth_client.token.refresh_tokens(params[:id])
+    oauth_client.token.refresh_tokens(@qbo_account.refresh_token)
   end
 
   def exchange_code_for_token

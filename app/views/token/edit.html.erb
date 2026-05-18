@@ -1,9 +1,13 @@
 <h1>Below is the Result of Your update Access Token:</h1>
 <p>
-Access Token: <%= params[:updated_access_token] %><br>
-Access Token Expires In: <%= params[:updated_expires_in] %><br>
-Refresh Token: <%= params[:updated_refresh_token] %><br>
-Refresh Token Expires In: <%= params[:updated_x_refresh_token_expires_in] %><br>
+  Access Token: <%= @qbo_account.access_token %><br>
+  Access Token Expires In: <%= params[:updated_expires_in] %><br>
+  Refresh Token: <%= @qbo_account.refresh_token %><br>
+  Refresh Token Expires In: <%= params[:updated_x_refresh_token_expires_in] %><br>
+  QBO Account Created At: <%= @qbo_account.created_at %><br>
+  QBO Account Updated At: <%= @qbo_account.updated_at %><br>
 </p>
 
+<%= link_to('Refresh Your OAuth Token', edit_token_path(@qbo_account)) %> <br>
+<%= button_to('Delete Your OAuth Token', token_path(@qbo_account), method: :delete) %> <br>
 <%= link_to("Home", params[:host_uri]) %>

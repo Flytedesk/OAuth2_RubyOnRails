@@ -5,6 +5,19 @@
 <div>3.Go to Developer.intuit.com, in your App, Add your Redirect_uri</div> </br>
 <div>Note: the logic is located at app/controllers/token_controller.rb</div>
 
+<h1>Below are the current QBO Account Attributes:</h1>
+<p>
+  Access Token: <%= @qbo_account.access_token %><br>
+  Refresh Token: <%= @qbo_account.refresh_token %><br>
+  QBO Account Created At: <%= @qbo_account.created_at %><br>
+  QBO Account Updated At: <%= @qbo_account.updated_at %><br>
+</p>
+
+<% if @qbo_account.persisted? %>
+  <%= link_to('Refresh Your OAuth Token', edit_token_path(@qbo_account)) %> <br>
+  <%= button_to('Delete Your OAuth Token', token_path(@qbo_account), method: :delete) %> <br>
+<% end %>
+
 <div>Click the Below button to start the flow:</div><br>
 <%= link_to(image_tag("/C2QB_white_btn_med_default.png"), params[:url]) %>
 <br><br>

@@ -1,11 +1,14 @@
 <h1>Below is the Result of Your Access Token:</h1>
 <p>
-Realm ID: <%= params[:realmId] %><br>
-Access Token: <%= params[:access_token] %><br>
-Access Token Expires In: <%= params[:expires_in] %><br>
-Refresh Token: <%= params[:refresh_token] %><br>
-Refresh Token Expires In: <%= params[:x_refresh_token_expires_in] %><br>
+  Realm ID: <%= params[:realmId] %><br>
+  Access Token: <%= @qbo_account.access_token %><br>
+  Access Token Expires In: <%= params[:expires_in] %><br>
+  Refresh Token: <%= @qbo_account.refresh_token %><br>
+  Refresh Token Expires In: <%= params[:x_refresh_token_expires_in] %><br>
+  QBO Account Created At: <%= @qbo_account.created_at %><br>
+  QBO Account Updated At: <%= @qbo_account.updated_at %><br>
 </p>
 
-<%= link_to("Refresh Your OAuth Token", params[:refresh_token] + "/edit") %> <br>
+<%= link_to('Refresh Your OAuth Token', edit_token_path(@qbo_account)) %> <br>
+<%= button_to('Delete Your OAuth Token', token_path(@qbo_account), method: :delete) %> <br>
 <%= link_to("Home", params[:host_uri]) %>
